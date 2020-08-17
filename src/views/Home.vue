@@ -10,9 +10,28 @@
       </button>
     </div>
     <div class="flex flex-wrap">
-      <div class="w-1/2 md:w-1/3 bg-gray-400 h-12"></div>
-      <div class="w-1/2 md:w-1/3 bg-gray-500 h-12"></div>
-      <div class="w-1/2 md:w-1/3 bg-gray-400 h-12"></div>
+      <div
+        class="w-1/2 md:w-1/3"
+        v-for="(collection, index) in collections"
+        v-bind:key="collection.id"
+      >
+        <div class="flex flex-wrap">
+          <div class="flex-full m-1">
+            <img src="../assets/images/mtg_card_back.jpg" />
+          </div>
+          <div class="flex-auto self-center">
+            {{ collection.name }}
+          </div>
+          <div class="m-1">
+            <button
+              class="modal-open bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              @click="removeCollection(index)"
+            >
+              remove
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
@@ -21,7 +40,6 @@
     <div
       class="opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"
       ref="modal"
-      tabindex="0"
       @keydown.esc="toggleModal"
     >
       <div
@@ -71,11 +89,26 @@
           </div>
 
           <!--Body-->
-          <p>Modal content can go here</p>
-          <p>...</p>
-          <p>...</p>
-          <p>...</p>
-          <p>...</p>
+          <form class="w-full max-w-sm mx-auto" @submit="addCollection">
+            <div class="md:flex md:items-center mb-6">
+              <div class="md:w-1/3">
+                <label
+                  class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                  for="inline-full-name"
+                >
+                  Full Name
+                </label>
+              </div>
+              <div class="md:w-2/3">
+                <input
+                  v-model="name"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="inline-full-name"
+                  type="text"
+                />
+              </div>
+            </div>
+          </form>
 
           <!--Footer-->
           <div class="flex justify-end pt-2">
@@ -87,7 +120,7 @@
             </button>
             <button
               class="px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400"
-              @click="toggleModal"
+              @click="addCollection"
             >
               Add
             </button>
@@ -108,6 +141,7 @@ export default {
   },
   data: function() {
     return {
+      name: "",
       collections: []
     };
   },
@@ -131,6 +165,17 @@ export default {
       modal.classList.toggle("opacity-0");
       modal.classList.toggle("pointer-events-none");
       body.classList.toggle("modal-active");
+    },
+
+    addCollection(e) {
+      e.preventDefault();
+      this.collections.push({ name: this.name });
+      this.name = "";
+      this.toggleModal();
+    },
+
+    removeCollection(id) {
+      this.collections.splice(id, 1);
     }
   }
 };
