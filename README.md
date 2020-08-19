@@ -28,3 +28,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - configure pwa settings: https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
 - vue persist: https://github.com/championswimmer/vuex-persist#note-on-localforage-and-async-stores
 - tailwind modal: https://www.tailwindtoolbox.com/components/modal
+- vuex modules: https://vuex.vuejs.org/guide/modules.html

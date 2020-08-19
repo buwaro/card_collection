@@ -11,7 +11,7 @@
     </div>
     <div class="flex flex-wrap">
       <div
-        class="w-1/2 md:w-1/3"
+        class="w-1/2 md:w-1/3 lg:w-1/4"
         v-for="(collection, index) in collections"
         v-bind:key="collection.id"
       >
@@ -141,9 +141,14 @@ export default {
   },
   data: function() {
     return {
-      name: "",
-      collections: []
+      name: ""
     };
+  },
+
+  computed: {
+    collections() {
+      return this.$store.getters["collection/list"];
+    }
   },
 
   mounted() {
@@ -169,13 +174,13 @@ export default {
 
     addCollection(e) {
       e.preventDefault();
-      this.collections.push({ name: this.name });
+      this.$store.dispatch("collection/add", { name: this.name });
       this.name = "";
       this.toggleModal();
     },
 
     removeCollection(id) {
-      this.collections.splice(id, 1);
+      this.$store.dispatch("collection/remove", id);
     }
   }
 };

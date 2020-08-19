@@ -1,12 +1,20 @@
 import { createStore } from "vuex";
-import state from "./state";
-import mutations from "./mutations";
-import actions from "./actions";
+import VuexPersistence from "vuex-persist";
+import state from "./global/state";
+import mutations from "./global/mutations";
+import actions from "./global/actions";
+import getters from "./global/getters";
 import modules from "./modules";
 
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+});
+
 export default createStore({
-  state: state,
-  mutations: mutations,
-  actions: actions,
-  modules: modules
+  state,
+  mutations,
+  actions,
+  getters,
+  modules,
+  plugins: [vuexLocal.plugin]
 });
