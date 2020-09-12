@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: process.env.NODE_ENV === "production" ? "/card_collector/" : "/",
   pwa: {
     name: "Card Collector",
     themeColor: "#FFFFFF",
@@ -7,12 +8,7 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: "black",
 
     // configure the workbox plugin
-    workboxPluginMode: "InjectManifest",
-    workboxOptions: {
-      // swSrc is required in InjectManifest mode.
-      swSrc: "dev/sw.js"
-      // ...other Workbox options...
-    }
+    workboxPluginMode: "GenerateSW"
   }
 }
 
