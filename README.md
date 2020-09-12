@@ -33,6 +33,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Select the dist folder of the app
 - Switch 'Web Server' to 'Started'
 
+### Deploy
+- run: `./deploy.sh`
+visit production at https://buwaro.github.io/card_collector/
+
 ### References
 - setup tailwindcss: https://medium.com/backticks-tildes/how-to-configure-your-vue-js-app-to-use-tailwind-css-a6f95d06e1c7
 - configure pwa settings: https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
